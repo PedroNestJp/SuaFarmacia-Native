@@ -1,20 +1,76 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen';
+import { ProductDetailsScreen } from './src/screens/ProductDetailsScreen';
+import CartScreen from './src/screens/CartScreen';
+import { CartProvider, useCart } from './CartContext';
+import LoginScreen from './src/screens/LoginScreen';
+import { MaterialIcons } from '@expo/vector-icons';
+import { theme } from './src/Theme';
+
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+const MainNavigator = () => {
+  const {cartItems} = useCart()
+  const calculateTotalItems = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="shopping-cart" color={color} size={size} />
+          ),
+          tabBarBadge: cartItems.length > 0 ? calculateTotalItems() : null,
+          tabBarBadgeStyle: {
+            backgroundColor: '#4CAF50',
+            color:theme.textColorWhite,
+            margin:2
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="person" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+  return (
+    <CartProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Main" component={MainNavigator} />
+          <Stack.Screen name="ProductDetailsScreen" component={ProductDetailsScreen} />
+          <Stack.Screen name="CartScreen" component={CartScreen} />
+          {/* Adicione mais telas conforme necessário */}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </CartProvider>
+  );
+};
+
+export default App;
