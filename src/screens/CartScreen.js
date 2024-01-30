@@ -1,7 +1,8 @@
 // src/screens/CartScreen.js
 import React from 'react';
-import { View, FlatList, Image, Text, Button, StyleSheet } from 'react-native';
+import { View, FlatList, Image, Text, Button, StyleSheet, Pressable } from 'react-native';
 import { useCart } from '../../CartContext';
+import { useNavigation } from '@react-navigation/native';
 
 const CartScreen = ({ navigation }) => {
   const { removeFromCart, incrementQuantity, decrementQuantity, cartItems } = useCart();
@@ -9,6 +10,11 @@ const CartScreen = ({ navigation }) => {
   const calculateTotal = () => {
     const total = cartItems.reduce((acc, item) => acc + parseFloat(item.price.replace('$', '')) * item.quantity, 0);
     return total.toFixed(2);
+  };
+
+  const handleCheckout = () => {
+    // Navegar para a tela de checkout com os dados necessários
+    navigation.navigate('OrderSummaryScreen', { cartItems, total: calculateTotal() });
   };
 
   const CartItem = ({ item }) => (
@@ -22,9 +28,9 @@ const CartScreen = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.actionButtons}>
-        <Button title="+" onPress={() => incrementQuantity(item)} />
-        <Button title="-" onPress={() => decrementQuantity(item)} />
-        <Button title="Remove" onPress={() => removeFromCart(item)} />
+        <Pressable title="+" onPress={() => incrementQuantity(item)} />
+        <Pressable title="-" onPress={() => decrementQuantity(item)} />
+        <Pressable title="Remove" onPress={() => removeFromCart(item)} />
       </View>
     </View>
   );
@@ -42,15 +48,14 @@ const CartScreen = ({ navigation }) => {
           renderItem={({ item }) => <CartItem item={item} />}
         />
       )}
-
       {cartItems.length > 0 && (
         <View style={styles.totalContainer}>
           <Text style={styles.totalText}>Total: ${calculateTotal()}</Text>
-          <Button title="Checkout" onPress={() => { /* Implementar a funcionalidade de checkout aqui */ }} />
+          <Pressable title="Checkout" onPress={handleCheckout} />
         </View>
       )}
 
-      <Button title="Go Back" onPress={() => navigation.goBack()} />
+      {/* Restante do código... */}
     </View>
   );
 };

@@ -6,10 +6,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import { ProductDetailsScreen } from './src/screens/ProductDetailsScreen';
 import CartScreen from './src/screens/CartScreen';
+import CheckoutScreen from './src/screens/CheckoutScreen';
 import { CartProvider, useCart } from './CartContext';
 import LoginScreen from './src/screens/LoginScreen';
 import { MaterialIcons } from '@expo/vector-icons';
 import { theme } from './src/Theme';
+import OrderSummaryScreen from './src/screens/OrderSummaryScreen';
+import RegisterScreen from './src/screens/RegisterScreen';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -19,6 +23,7 @@ const MainNavigator = () => {
   const calculateTotalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -66,6 +71,9 @@ const App = () => {
           <Stack.Screen name="Main" component={MainNavigator} />
           <Stack.Screen name="ProductDetailsScreen" component={ProductDetailsScreen} />
           <Stack.Screen name="CartScreen" component={CartScreen} />
+          <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} />
+          <Stack.Screen name="OrderSummaryScreen" component={OrderSummaryScreen} />
+          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           {/* Adicione mais telas conforme necessário */}
         </Stack.Navigator>
       </NavigationContainer>

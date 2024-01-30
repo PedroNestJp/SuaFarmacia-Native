@@ -1,13 +1,13 @@
 // src/components/ProductCard.js
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, StyleSheet, Pressable, Image } from 'react-native';
 import { theme } from '../Theme';
 import Button from '../components/Button';
 
 
 const ProductCard = ({ product, onPress, onAddToCartPress }) => {
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
+    <Pressable style={styles.card} onPress={onPress}>
       <Text style={styles.title}>{product.name}</Text>
       <Image source={require('../../assets/generic-photo.png')} style={styles.image} />
       <Text>{product.shortDescription}</Text>
@@ -17,7 +17,7 @@ const ProductCard = ({ product, onPress, onAddToCartPress }) => {
         onPress={onAddToCartPress} 
         color={theme.primaryColor} 
         textColor={theme.backgroundColor} />
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
