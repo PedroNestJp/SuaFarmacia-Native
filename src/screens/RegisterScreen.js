@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db } from '../services/firebase';
 
 const RegisterScreen = () => {
   const [name, setName] = useState('');

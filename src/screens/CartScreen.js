@@ -1,11 +1,13 @@
 // src/screens/CartScreen.js
 import React from 'react';
 import { View, FlatList, Image, Text, Button, StyleSheet, Pressable } from 'react-native';
-import { useCart } from '../../CartContext';
+import { useCart } from '../context/CartContext';
 import { useNavigation } from '@react-navigation/native';
+import {Colors, FontSize, Borders, Spacing } from '../Styles/styles';
 
-const CartScreen = ({ navigation }) => {
+const CartScreen = () => {
   const { removeFromCart, incrementQuantity, decrementQuantity, cartItems } = useCart();
+  const navigation = useNavigation();
 
   const calculateTotal = () => {
     const total = cartItems.reduce((acc, item) => acc + parseFloat(item.price.replace('$', '')) * item.quantity, 0);
@@ -28,9 +30,15 @@ const CartScreen = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.actionButtons}>
-        <Pressable title="+" onPress={() => incrementQuantity(item)} />
-        <Pressable title="-" onPress={() => decrementQuantity(item)} />
-        <Pressable title="Remove" onPress={() => removeFromCart(item)} />
+        <Button title="+" onPress={() => incrementQuantity(item)}>
+          <Text>+</Text>
+        </Button>
+        <Button title="-" onPress={() => decrementQuantity(item)}>
+          <Text>-</Text>
+        </Button>
+        <Button title="Remove" onPress={() => removeFromCart(item)}>
+          <Text>Remove</Text>
+        </Button>
       </View>
     </View>
   );
@@ -51,11 +59,11 @@ const CartScreen = ({ navigation }) => {
       {cartItems.length > 0 && (
         <View style={styles.totalContainer}>
           <Text style={styles.totalText}>Total: ${calculateTotal()}</Text>
-          <Pressable title="Checkout" onPress={handleCheckout} />
+          <Pressable title="Checkout" onPress={handleCheckout} style={styles.checkoutButton}>
+            <Text style={styles.checkoutButtonText}>Checkout</Text>
+          </Pressable>
         </View>
       )}
-
-      {/* Restante do código... */}
     </View>
   );
 };
@@ -66,10 +74,10 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   cartTitle: {
-    fontSize: 24,
+    fontSize: FontSize.big,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginVertical: 16,
+    marginVertical: Spacing.margin,
   },
   emptyCartText: {
     textAlign: 'center',
@@ -79,39 +87,46 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 180,
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    padding: Spacing.padding,
+    borderBottomWidth: Borders.borderWidth,
+    borderBottomColor: Colors.borderColor,
   },
   itemImage: {
     width: 50,
     height: 50,
-    borderRadius: 25,
-    marginRight: 16,
+    borderRadius: Borders.borderRadius,
+    marginRight: Spacing.margin,
   },
   itemDetails: {
     flex: 1,
   },
   title: {
-    fontSize: 16,
+    fontSize: FontSize.medium,
     fontWeight: 'bold',
   },
-  quantityContainer: {
-
-  },
+  quantityContainer: {},
   actionButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    gap: 5,
+    gap: Spacing.margin,
   },
   totalContainer: {
-    marginVertical: 16,
+    marginVertical: Spacing.margin,
     alignItems: 'center',
   },
   totalText: {
-    fontSize: 18,
-    marginBottom: 8,
+    fontSize: FontSize.medium,
+    marginBottom: Spacing.margin,
+  },
+  checkoutButton: {
+    backgroundColor: Colors.primary,
+    padding: Spacing.padding,
+    borderRadius: Borders.borderRadius,
+  },
+  checkoutButtonText: {
+    color: Colors.textWhite,
+    fontWeight: 'bold',
   },
 });
 

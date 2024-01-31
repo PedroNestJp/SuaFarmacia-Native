@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Alert } from 'react-native';
-import { useCart } from '../../CartContext';
+import { useCart } from '../context/CartContext';
 import Button from '../components/Button';
 
 export const ProductDetailsScreen = ({ route, navigation }) => {

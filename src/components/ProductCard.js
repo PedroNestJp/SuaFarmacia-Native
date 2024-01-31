@@ -1,8 +1,9 @@
 // src/components/ProductCard.js
 import React from 'react';
 import { Text, StyleSheet, Pressable, Image } from 'react-native';
-import { theme } from '../Theme';
+import { theme, Borders } from '../Styles/styles';
 import Button from '../components/Button';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 const ProductCard = ({ product, onPress, onAddToCartPress }) => {
@@ -15,8 +16,8 @@ const ProductCard = ({ product, onPress, onAddToCartPress }) => {
       <Button 
         title="Comprar" 
         onPress={onAddToCartPress} 
-        color={theme.primaryColor} 
-        textColor={theme.backgroundColor} />
+        color={Colors.primaryColor} 
+        textColor={Colors.Text} />
     </Pressable>
   );
 };
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   card: {
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: theme.borderColor,
+    borderColor: Borders.borderColor,
     borderRadius: 8,
     padding: 10,
     margin: 5,

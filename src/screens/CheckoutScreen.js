@@ -1,6 +1,6 @@
 // CheckoutScreen.js
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, Pressable } from 'react-native';
 
 const CheckoutScreen = ({ route, navigation }) => {
   const { cartItems, total } = route.params;
@@ -17,7 +17,7 @@ const CheckoutScreen = ({ route, navigation }) => {
       <Text style={styles.title}>Resumo do Pedido</Text>
       {/* Mostrar itens do carrinho e informações necessárias para o checkout */}
       <Text>Total: ${total}</Text>
-      <Button title="Place Order" onPress={handlePlaceOrder} />
+      <Pressable title="Place Order" onPress={handlePlaceOrder} />
     </View>
   );
 };

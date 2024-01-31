@@ -1,10 +1,11 @@
-import React from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { theme, Fonts, Spacing, Borders } from '../Styles/styles';
 import Header from '../components/Header';
-import ProductCard from '../components/ProductCard';
-import { useCart } from '../../CartContext';
-import { theme } from '../Theme';
+import ProductCard from '../components/ProductCard'
+import { useCart } from '../context/CartContext';
 import Button from '../components/Button';
+import Modal from 'react-native-modal';
 
 const products = [
   {
@@ -48,6 +49,11 @@ const products = [
 
 const HomeScreen = ({ navigation }) => {
   const { cartItems, addToCart, incrementQuantity } = useCart();
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   const calculateTotalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -73,26 +79,26 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header title='Pharmacy App' />
+      <Header title="Pharmacy App" />
+
+      <Button title="Open Modal" onPress={toggleModal} />
+      <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalTitle}>This is a Modal</Text>
+          <Button title="Close" onPress={toggleModal} />
+        </View>
+      </Modal>
       <FlatList
         data={products}
         keyExtractor={(item) => item.id}
         renderItem={renderProduct}
       />
-      <View style={styles.cartButtonContainer}>
-        <Button
-          title={`View Cart (${calculateTotalItems()})`}
-          onPress={() => navigation.navigate('CartScreen', { cartItems })}
-          color={theme.primaryColor}
-        />
-      </View>
-      {/* <TouchableOpacity
+      <TouchableOpacity
         style={styles.cartIcon}
         onPress={() => navigation.navigate('CartScreen', { cartItems })}
       >
-        <FontAwesome name="shopping-cart" size={24} color={theme.backgroundColor} />
         <Text style={styles.cartItemCount}>{calculateTotalItems()}</Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -100,24 +106,31 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.backgroundColor,
-  },
-  cartButtonContainer: {
-    margin: 16,
+    backgroundColor: theme.background,
   },
   cartIcon: {
     position: 'absolute',
-    bottom: 80,
-    right: 16,
-    backgroundColor: theme.primaryColor,
-    padding: 10,
-    borderRadius: 50,
+    bottom: Spacing.margin,
+    right: Spacing.margin,
+    backgroundColor: theme.primary,
+    padding: Spacing.padding,
+    borderRadius: Borders.radius,
     flexDirection: 'row',
     alignItems: 'center',
   },
   cartItemCount: {
-    color: theme.backgroundColor,
-    marginLeft: 5,
+    color: theme.background,
+    marginLeft: Spacing.margin,
+  },
+  modalContainer: {
+    backgroundColor: theme.secondary,
+    padding: Spacing.padding,
+    borderRadius: Borders.radius,
+  },
+  modalTitle: {
+    fontSize: Fonts.title.fontSize,
+    fontWeight: Fonts.title.fontWeight,
+    marginBottom: Spacing.margin,
   },
 });
 
