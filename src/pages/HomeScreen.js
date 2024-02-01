@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { theme, Fonts, Spacing, Borders, Colors } from '../Styles/styles';
+import { View, FlatList, StyleSheet, Text } from 'react-native';
+import { Fonts, Spacing, Colors, Borders } from '../Styles/styles';
 import Header from '../components/Header';
-import ProductCard from '../components/ProductCard'
-import { useCart } from '../context/CartContext';
+import ProductCard from '../components/ProductCard';
 import Button from '../components/Button';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
+import { useCart } from '../context/CartContext';
+import { Pressable } from 'react-native';
 
 const products = [
   {
@@ -49,15 +50,18 @@ const products = [
 ];
 
 const HomeScreen = ({ navigation }) => {
-  const { cartItems, addToCart, incrementQuantity } = useCart();
   const [isModalVisible, setModalVisible] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const { cartItems, addToCart, incrementQuantity } = useCart();
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
   const calculateTotalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
+
   const handleAddToCart = (item) => {
     const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
 
@@ -67,6 +71,15 @@ const HomeScreen = ({ navigation }) => {
       addToCart(item);
     }
   };
+
+  const handleSearch = (searchText) => {
+    const results = products.filter((product) =>
+    product.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setSearchResults(results);
+    console.log('Pesquisando por:', searchText, results);
+  };
+
   const renderProduct = ({ item }) => (
     <ProductCard
       product={item}
@@ -74,10 +87,10 @@ const HomeScreen = ({ navigation }) => {
       onAddToCartPress={() => handleAddToCart(item)}
     />
   );
+
   return (
     <View style={styles.container}>
-      <Header title="SUA FARMACIA" />
-
+      <Header title="SUA FARMACIA" onSearch={handleSearch} />
       <Button title="Open Modal" onPress={toggleModal} />
       <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
         <View style={styles.modalContainer}>
@@ -85,18 +98,26 @@ const HomeScreen = ({ navigation }) => {
           <Button title="Close" onPress={toggleModal} />
         </View>
       </Modal>
-      <FlatList
-        data={products}
-        keyExtractor={(item) => item.id}
-        renderItem={renderProduct}
-      />
-      <TouchableOpacity
+      {searchResults.length > 0 ? (
+        <FlatList
+          data={searchResults}
+          keyExtractor={(item) => item.id}
+          renderItem={renderProduct}
+        />
+      ) : (
+        <FlatList
+          data={products}
+          keyExtractor={(item) => item.id}
+          renderItem={renderProduct}
+        />
+      )}
+      <Pressable
         style={styles.cartIcon}
         onPress={() => navigation.navigate('CartScreen', { cartItems })}
       >
-        <Ionicons name='basket' color={Colors.textWhite} ></Ionicons>
+        <Ionicons name='basket' color={Colors.textWhite} />
         <Text style={styles.cartItemCount}>{calculateTotalItems()}</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };
@@ -123,7 +144,7 @@ const styles = StyleSheet.create({
   modalContainer: {
     backgroundColor: Colors.background,
     padding: Spacing.padding,
-    borderRadius: Borders.radius,
+    borderRadius: Borders.borderRadius,
   },
   modalTitle: {
     fontSize: Fonts.title.fontSize,

@@ -4,14 +4,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import HomeScreen from '../screens/HomeScreen';
-import { ProductDetailsScreen } from '../screens/ProductDetailsScreen';
-import CartScreen from '../screens/CartScreen';
-import CheckoutScreen from '../screens/CheckoutScreen';
-import RegisterScreen from '../screens/RegisterScreen';
-import LoginScreen from '../screens/LoginScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import OrderSummaryScreen from '../screens/OrderSummaryScreen';
+import HomeScreen from '../pages/HomeScreen';
+import { ProductDetailsScreen } from '../pages/ProductDetailsScreen';
+import CartScreen from '../pages/CartScreen';
+import CheckoutScreen from '../pages/CheckoutScreen';
+import RegisterScreen from '../pages/RegisterScreen';
+import LoginScreen from '../pages/LoginScreen';
+import ProfileScreen from '../pages/ProfileScreen';
+import OrderSummaryScreen from '../pages/OrderSummaryScreen';
 
 import { CartProvider, useCart } from '../context/CartContext';
 import { Colors } from '../Styles/styles';
