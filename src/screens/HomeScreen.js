@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { theme, Fonts, Spacing, Borders } from '../Styles/styles';
+import { theme, Fonts, Spacing, Borders, Colors } from '../Styles/styles';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard'
 import { useCart } from '../context/CartContext';
 import Button from '../components/Button';
 import Modal from 'react-native-modal';
+import { Ionicons } from '@expo/vector-icons';
 
 const products = [
   {
@@ -54,11 +55,9 @@ const HomeScreen = ({ navigation }) => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-
   const calculateTotalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
-
   const handleAddToCart = (item) => {
     const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
 
@@ -68,7 +67,6 @@ const HomeScreen = ({ navigation }) => {
       addToCart(item);
     }
   };
-
   const renderProduct = ({ item }) => (
     <ProductCard
       product={item}
@@ -76,10 +74,9 @@ const HomeScreen = ({ navigation }) => {
       onAddToCartPress={() => handleAddToCart(item)}
     />
   );
-
   return (
     <View style={styles.container}>
-      <Header title="Pharmacy App" />
+      <Header title="SUA FARMACIA" />
 
       <Button title="Open Modal" onPress={toggleModal} />
       <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
@@ -97,6 +94,7 @@ const HomeScreen = ({ navigation }) => {
         style={styles.cartIcon}
         onPress={() => navigation.navigate('CartScreen', { cartItems })}
       >
+        <Ionicons name='basket' color={Colors.textWhite} ></Ionicons>
         <Text style={styles.cartItemCount}>{calculateTotalItems()}</Text>
       </TouchableOpacity>
     </View>
@@ -106,24 +104,24 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.background,
+    backgroundColor: Colors.background,
   },
   cartIcon: {
     position: 'absolute',
     bottom: Spacing.margin,
     right: Spacing.margin,
-    backgroundColor: theme.primary,
+    backgroundColor: Colors.secondary,
     padding: Spacing.padding,
-    borderRadius: Borders.radius,
+    borderRadius: 50,
     flexDirection: 'row',
     alignItems: 'center',
   },
   cartItemCount: {
-    color: theme.background,
+    color: Colors.background,
     marginLeft: Spacing.margin,
   },
   modalContainer: {
-    backgroundColor: theme.secondary,
+    backgroundColor: Colors.background,
     padding: Spacing.padding,
     borderRadius: Borders.radius,
   },

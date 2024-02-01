@@ -7,6 +7,15 @@
     textBlack: '#000000',
     borderColor: '#000000 solid 0.50',
   };
+  const Theme = {
+    primaryColor: '#5039EA',
+    secondaryColor: '#333',
+    textColor: '#333',
+    textColorWhite: '#fff',
+    backgroundColor: '#fff',
+    borderColor: '#ddd',
+    accentColor: '#ff6347',
+  };
   
  const FontSize = {
     smalest: 8,
@@ -62,15 +71,7 @@
     background: Colors.background,
   };
 
- const Theme = {
-    primaryColor: '#007bff',
-    secondaryColor: '#333',
-    textColor: '#333',
-    textColorWhite: '#fff',
-    backgroundColor: '#fff',
-    borderColor: '#ddd',
-    accentColor: '#ff6347',
-  };
+
 
   export {Colors, FontSize, Borders, Theme, productCard, Spacing, Fonts}
   

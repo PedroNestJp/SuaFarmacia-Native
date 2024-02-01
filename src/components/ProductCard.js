@@ -17,7 +17,9 @@ const ProductCard = ({ product, onPress, onAddToCartPress }) => {
         title="Comprar" 
         onPress={onAddToCartPress} 
         color={Colors.primaryColor} 
-        textColor={Colors.Text} />
+        textColor={Colors.Text}
+        backgroundColor={Colors.primary}
+         />
     </Pressable>
   );
 };

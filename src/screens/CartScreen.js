@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   cartTitle: {
-    fontSize: FontSize.big,
+    // fontSize: FontSize.big,
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: Spacing.margin,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: FontSize.medium,
+    // fontSize: FontSize.medium,
     fontWeight: 'bold',
   },
   quantityContainer: {},
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   totalText: {
-    fontSize: FontSize.medium,
+    // fontSize: FontSize.medium,
     marginBottom: Spacing.margin,
   },
   checkoutButton: {

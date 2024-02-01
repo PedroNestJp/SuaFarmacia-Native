@@ -14,7 +14,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import OrderSummaryScreen from '../screens/OrderSummaryScreen';
 
 import { CartProvider, useCart } from '../context/CartContext';
-import { theme } from '../Styles/styles';
+import { Colors } from '../Styles/styles';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -44,8 +44,8 @@ const MainNavigator = () => {
           ),
           tabBarBadge: cartItems.length > 0 ? calculateTotalItems() : null,
           tabBarBadgeStyle: {
-            backgroundColor: '#4CAF50',
-            color:theme.textColorWhite,
+            backgroundColor: Colors.secondary,
+            color:Colors.textWhite,
             margin:2
           },
         }}
