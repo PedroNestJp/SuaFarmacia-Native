@@ -19,6 +19,17 @@ import { Colors } from '../Styles/styles';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+const TabIcon = ({ name, color, size }) => {
+  return <MaterialIcons name={name} color={color} size={size} />;
+};
+
+const tabBarColors = {
+  active: Colors.primary,        // cor para ícone ativo
+  inactive: Colors.inactive,     // cor para ícone inativo
+  badgeBackground: Colors.secondary,
+  badgeText: Colors.textWhite,
+};
+
 const MainNavigator = () => {
   const { cartItems } = useCart();
   const calculateTotalItems = () => {
@@ -31,7 +42,7 @@ const MainNavigator = () => {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="home" color={color} size={size} />
+            <TabIcon name="home" color={color} size={size} />
           ),
         }}
       />
@@ -40,17 +51,17 @@ const MainNavigator = () => {
         component={CartScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="shopping-cart" color={color} size={size} />
+            <TabIcon name="shopping-cart" color={color} size={size} />
           ),
           tabBarBadge: cartItems.length > 0 ? calculateTotalItems() : null,
           tabBarBadgeStyle: {
-            backgroundColor: Colors.secondary,
-            color:Colors.textWhite,
-            margin:2
+            backgroundColor: tabBarColors.badgeBackground,
+            color: tabBarColors.badgeText,
+            margin: 2,
           },
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Login"
         component={LoginScreen}
         options={{
@@ -58,13 +69,13 @@ const MainNavigator = () => {
             <MaterialIcons name="person" color={color} size={size} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
-        name="Profile"
+        name="Conta"
         component={ProfileScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="person" color={color} size={size} />
+            <TabIcon name="person" color={color} size={size} />
           ),
         }}
       />

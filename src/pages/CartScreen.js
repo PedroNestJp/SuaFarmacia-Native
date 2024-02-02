@@ -3,7 +3,7 @@ import React from 'react';
 import { View, FlatList, Image, Text, Button, StyleSheet, Pressable } from 'react-native';
 import { useCart } from '../context/CartContext';
 import { useNavigation } from '@react-navigation/native';
-import {Colors, FontSize, Borders, Spacing } from '../Styles/styles';
+import {Colors, Borders, Margin, ProductCardStyles } from '../Styles/styles';
 
 const CartScreen = () => {
   const { removeFromCart, incrementQuantity, decrementQuantity, cartItems } = useCart();
@@ -20,7 +20,7 @@ const CartScreen = () => {
   };
 
   const CartItem = ({ item }) => (
-    <View style={styles.cartItem}>
+    <View style={ProductCardStyles.card}>
       <Image source={require('../../assets/generic-photo.png')} style={styles.itemImage} />
       <View style={styles.itemDetails}>
         <Text style={styles.title}>{item.name}</Text>
@@ -77,25 +77,17 @@ const styles = StyleSheet.create({
     // fontSize: FontSize.big,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginVertical: Spacing.margin,
+    marginVertical: Margin.medium,
   },
   emptyCartText: {
     textAlign: 'center',
   },
-  cartItem: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 180,
-    padding: Spacing.padding,
-    borderBottomWidth: Borders.borderWidth,
-    borderBottomColor: Colors.borderColor,
-  },
+
   itemImage: {
     width: 50,
     height: 50,
     borderRadius: Borders.borderRadius,
-    marginRight: Spacing.margin,
+    marginRight: Margin.medium,
   },
   itemDetails: {
     flex: 1,
@@ -109,19 +101,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    gap: Spacing.margin,
+    gap: Margin.medium,
   },
   totalContainer: {
-    marginVertical: Spacing.margin,
+    marginVertical: Margin.medium,
     alignItems: 'center',
   },
   totalText: {
     // fontSize: FontSize.medium,
-    marginBottom: Spacing.margin,
+    marginBottom: Margin.medium,
   },
   checkoutButton: {
     backgroundColor: Colors.primary,
-    padding: Spacing.padding,
+    padding: Margin.medium,
     borderRadius: Borders.borderRadius,
   },
   checkoutButtonText: {

@@ -9,14 +9,14 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    // Adicione aqui a lógica de login
+    //lógica de login
     const auth = getAuth();
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       // Signed in 
       const user = userCredential.user;
       // ...
-      // Após o login bem-sucedido, você pode navegar para a tela principal do aplicativo
+      // Após o login bem-sucedido, navegar para a tela principal do aplicativo
       navigation.navigate('Home');
     } catch (error) {
       const errorCode = error.code;

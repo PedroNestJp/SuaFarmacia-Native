@@ -9,22 +9,30 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@expo/vector-icons": "^14.0.0",
-    "@expo/webpack-config": "~19.0.1",
+    "@expo/vector-icons": "^13.0.0",
+    "@expo/webpack-config": "^19.0.1",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
-    "expo": "^50.0.5",
-    "expo-status-bar": "~1.11.1",
+    "deprecated-react-native-prop-types": "^5.0.0",
+    "dotenv": "^16.4.1",
+    "expo": "^50.0.4",
+    "expo-status-bar": "~1.6.0",
     "firebase": "^9.23.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.73.2",
+    "react-native": "0.72.6",
     "react-native-modal": "^13.0.1",
-    "react-native-web": "^0.19.10"
+    "react-native-web": "^0.19.10",
+    "uglify-js": "^3.13.0",
+    "uuid": "^7.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.23.9",
+    "@types/babel__core": "^7.20.5",
+    "@types/react": "^18.2.51",
+    "@types/react-native": "^0.73.0",
+    "typescript": "^5.3.3"
   },
   "private": true
 }
