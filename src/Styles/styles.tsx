@@ -40,7 +40,7 @@ const Spaces = {
 
 // Texts
 
-const Fonts = {
+const Fonts:any = {
   fontFamily: {
     fontFamily: 'Roboto'
   },
@@ -86,7 +86,7 @@ const IconsTab = {
 }
 
 
- const Container = {
+ const Container:any = {
     flex: 1,
     backgroundColor: Colors.background,
   }
@@ -126,7 +126,7 @@ const ProductCardStyles = ({
 
 // Header :
 
-const HeaderStyles = {
+const HeaderStyles:any = {
   justifyContent: 'space-around',
   flexDirection: 'row',
   backgroundColor: Colors.primary,
@@ -134,7 +134,7 @@ const HeaderStyles = {
   alignItems: 'center',
 }
 
-const AlignCenter = {
+const AlignCenter:any = {
   alignItems: 'center',
   justifyContent: 'Center',
 }

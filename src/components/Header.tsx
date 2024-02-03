@@ -2,14 +2,11 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Pressable, FlatList } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Borders, Colors, Fonts, HeaderStyles, AlignCenter, Icons } from '../Styles/styles';
+import { Borders, Colors, Fonts, AlignCenter, Icons, HeaderStyles } from '../Styles/styles';
 import ProductCard from '../components/ProductCard';
+import { useCart } from '../context/CartContext';
 
-interface HeaderProps {
-  title: string;
-  onSearch: (searchText: string) => void;
-  navigation: any; // Certifique-se de ajustar o tipo conforme sua necessidade
-}
+
 
 interface Product {
   id: string;
@@ -21,16 +18,23 @@ interface Product {
   longDescription: string;
 }
 
+interface HeaderProps {
+  title: string;
+  navigation:any // Certifique-se de ajustar o tipo conforme sua necessidad
+  onSearch: (searchText: string) => void;
+}
+const products: Product[] = [
+  // ... your product data
+];
 const Header: React.FC<HeaderProps> = ({ title, onSearch, navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const { cartItems, addToCart, incrementQuantity } = useCart();
 
   const handleSearch = () => {
     const textToSearch = searchText.trim().toUpperCase();
     // Mock de dados para simular a busca
-    const products: Product[] = [
-      // ... (seus produtos)
-    ];
+
     const results = products.filter((product) =>
       product.name.toUpperCase().includes(textToSearch)
     );
@@ -39,10 +43,21 @@ const Header: React.FC<HeaderProps> = ({ title, onSearch, navigation }) => {
     console.log('Pesquisando por:', textToSearch, results);
   };
 
+  const handleAddToCart = (item: Product) => {
+    const existingItem = cartItems.find((cartItem: { id: string; }) => cartItem.id === item.id);
+
+    if (existingItem) {
+      incrementQuantity(existingItem);
+    } else {
+      addToCart(item);
+    }
+  };
+
   const renderProduct = ({ item }: { item: Product }) => (
     <ProductCard
       product={item}
       onPress={() => navigation.navigate('ProductDetailsScreen', { product: item })}
+      onAddToCartPress={() => handleAddToCart(item)}
     />
   );
 
