@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import { View, FlatList, StyleSheet, Text, Pressable } from 'react-native';
-import { Colors, ModalStyles, Margin, Container, Icons, FontSize, Borders } from '../Styles/styles';
+import { Colors, ModalStyles, Margin, Container, Icons, FontSize, Borders, ContainerCenter } from '../Styles/styles';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import Button from '../components/Button';
@@ -103,16 +103,15 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     />
   );
 
- 
   return (
     <View style={Container}>
       <Header navigation={navigation} title="SUA FARMACIA" onSearch={handleSearch} />
-      <View style={Container}>
-        <Button title="Open Modal" onPress={toggleModal} />
+      <View style={ContainerCenter} >
+        <Button color={''} disabled={''} title="Open Modal" onPress={toggleModal} />
         <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalTitle}>Modal Aberto</Text>
-            <Button title="Close" onPress={toggleModal} />
+          <View style={ModalStyles.modalContainer}>
+            <Text style={ModalStyles.modalTitle}>Modal Aberto</Text>
+            <Button color={''} disabled={''} title="Close" onPress={toggleModal} />
           </View>
         </Modal>
         {searchResults.length > 0 ? (
@@ -159,17 +158,7 @@ const styles = StyleSheet.create({
     color: Colors.background,
     marginLeft: Margin.medium,
   },
-  modalContainer: {
-    alignItems: 'center',
-    backgroundColor: Colors.background,
-    padding: Margin.big,
-    borderRadius: Borders.borderRadius,
-  },
-  modalTitle: {
-    fontSize: FontSize.smal,
-    fontWeight: 'bold',
-    marginBottom: Margin.big,
-  },
+
 });
 
 export default HomeScreen;

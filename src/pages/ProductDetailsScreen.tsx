@@ -3,14 +3,14 @@ import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import { useCart } from '../context/CartContext';
 import Button from '../components/Button';
 
-export const ProductDetailsScreen = ({ route, navigation }) => {
+export const ProductDetailsScreen = ({ route, navigation } : {route:any, navigation:any}) => {
   const { product } = route.params;
   const { cartItems, addToCart, incrementQuantity } = useCart();
 
-  const isProductInCart = cartItems.some((item) => item.id === product.id);
+  const isProductInCart = cartItems.some((item:any) => item.id === product.id);
 
   const handleAddToCart = () => {
-    const existingItem = cartItems.find((cartItem) => cartItem.id === product.id);
+    const existingItem = cartItems.find((cartItem:any) => cartItem.id === product.id);
 
     if (existingItem) {
       incrementQuantity(existingItem);
@@ -45,9 +45,10 @@ export const ProductDetailsScreen = ({ route, navigation }) => {
             title="Comprar Agora"
             onPress={comprarAgora}
             color="#4caf50"
+            disabled={''}
           />
         </View>
-        <Button title="Voltar" onPress={() => navigation.goBack()} color="#555" />
+        <Button disabled={''} title="Voltar" onPress={() => navigation.goBack()} color="#555" />
       </View>
     </View>
   );

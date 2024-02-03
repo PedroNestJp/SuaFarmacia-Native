@@ -90,6 +90,11 @@ const IconsTab = {
     flex: 1,
     backgroundColor: Colors.background,
   }
+ const ContainerCenter:any = {
+    flex: 1,
+    backgroundColor: Colors.background,
+    alignItems: 'center',
+  }
 
 // SCREENS -------------------------------------------------------------------------------------------------------------------------
 
@@ -141,7 +146,7 @@ const AlignCenter:any = {
 
 // Button
 
-const ButtonStyles = {
+const ButtonStyles:any = {
   buttonContainer: {
     padding: 10,
     borderRadius: Borders.borderRadius,
@@ -158,7 +163,7 @@ const ButtonStyles = {
 
 // Modal
 
-const ModalStyles = {
+const ModalStyles:any = {
   modalContainer: {
     alignItems: 'center',
     backgroundColor: Colors.background,
@@ -178,5 +183,5 @@ export {
   ProductCardStyles,
   Margin, Fonts, Icons,
   HeaderStyles, AlignCenter,
-  ButtonStyles, ModalStyles, Spaces, Container, IconsTab
+  ButtonStyles, ModalStyles, Spaces, Container, IconsTab, ContainerCenter
 }

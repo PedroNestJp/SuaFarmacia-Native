@@ -19,17 +19,19 @@ interface ProductCardProps {
   onPress: () => void;
 }
 
-const ProductCard:React.FC<ProductCardProps> = ({ product, onPress, onAddToCartPress }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onPress, onAddToCartPress }) => {
   return (
     <Pressable style={ProductCardStyles.card} onPress={onPress}>
       <Image source={require('../../assets/generic-photo.png')} style={styles.image} />
       <Text style={Fonts.title}>{product.name}</Text>
       <Text>{product.shortDescription}</Text>
       <Text>{product.price}</Text>
-      <Button 
-        title="Comprar" 
-        onPress={onAddToCartPress} 
-         />
+      <Button
+        color={''}
+        disabled={''}
+        title="Comprar"
+        onPress={onAddToCartPress}
+      />
     </Pressable>
   );
 };
@@ -63,7 +65,7 @@ const Fonts = StyleSheet.create({
   // Outros estilos...
 });
 
-const ProductCardStyles = StyleSheet.create ({
+const ProductCardStyles = StyleSheet.create({
   card: {
     alignItems: 'center',
     borderWidth: 1,
