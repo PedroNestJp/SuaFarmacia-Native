@@ -2,7 +2,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 
-const OrderSummaryScreen = ({ route, navigation }) => {
+interface OrderSummaryScreenProps {
+  navigation: any;
+}
+
+const OrderSummaryScreen = ({ route, navigation } : {route:any, navigation:any}) => {
   const { cartItems, total } = route.params;
 
   const handleCheckout = () => {

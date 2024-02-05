@@ -1,13 +1,23 @@
 // src/screens/CartScreen.js
 import React from 'react';
-import { View, FlatList, Image, Text, Button, StyleSheet, Pressable } from 'react-native';
+import { View, FlatList, Image, Text, StyleSheet, Pressable } from 'react-native';
 import { useCart } from '../context/CartContext';
 import { useNavigation } from '@react-navigation/native';
 import {Colors, Borders, Margin, ProductCardStyles } from '../Styles/styles';
+import Button from '../components/Button';
+
+
 
 const CartScreen = () => {
   const { removeFromCart, incrementQuantity, decrementQuantity, cartItems } = useCart();
   const navigation = useNavigation();
+
+  interface CartItem {
+    id: string;
+    name: string;
+    price: string;
+    // ... outras propriedades
+  }
 
   const calculateTotal = () => {
     const total = cartItems.reduce((acc, item) => acc + parseFloat(item.price.replace('$', '')) * item.quantity, 0);
@@ -18,6 +28,8 @@ const CartScreen = () => {
     // Navegar para a tela de checkout com os dados necessários
     navigation.navigate('OrderSummaryScreen', { cartItems, total: calculateTotal() });
   };
+
+
 
   const CartItem = ({ item }) => (
     <View style={ProductCardStyles.card}>
@@ -59,9 +71,9 @@ const CartScreen = () => {
       {cartItems.length > 0 && (
         <View style={styles.totalContainer}>
           <Text style={styles.totalText}>Total: ${calculateTotal()}</Text>
-          <Pressable title="Checkout" onPress={handleCheckout} style={styles.checkoutButton}>
+          <Button title="Checkout" onPress={handleCheckout} style={styles.checkoutButton}>
             <Text style={styles.checkoutButtonText}>Checkout</Text>
-          </Pressable>
+          </Button>
         </View>
       )}
     </View>
