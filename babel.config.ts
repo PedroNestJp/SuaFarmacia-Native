@@ -1,9 +1,8 @@
-// import type {API} from '@babel/core'
+// import type { Api } from '@babel/core';
 
-// export default function (api: API) {
+// module.exports = function (api: Api) {
 //   api.cache(true);
-
 //   return {
 //     presets: ['babel-preset-expo'],
 //   };
-// }
+// };

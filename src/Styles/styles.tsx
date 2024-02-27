@@ -1,5 +1,5 @@
 // styles.js
-
+import { StyleSheet } from "react-native";
 
 // colors
 const Colors = {
@@ -32,91 +32,130 @@ const Margin = {
 };
 
 const Spaces = {
-  height: '',
-  width: '',
-  padding: '',
+  height: 16,
+  width: 16,
+  padding: 16,
 
 };
 
+const AlignCenter = StyleSheet.create({
+  Center: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+})
+
 // Texts
 
-const Fonts:any = {
+const Fonts = StyleSheet.create({
   fontFamily: {
     fontFamily: 'Roboto'
   },
-  title: {
-    fontSize: FontSize.medium,
+  titleBlack: {
+    fontSize: FontSize.big,
     fontWeight: 'bold',
     color: Colors.textBlack,
     margin: Margin.small
   },
   titleWhite: {
-    fontSize: FontSize.smal,
+    fontSize: FontSize.big,
     fontWeight: 'bold',
     color: Colors.textWhite,
+    margin: Margin.small
+    
   },
   subTitle: {
-    fontSize: FontSize.smal,
-    fontWeight: 'regular',
+    fontSize: FontSize.medium,
+    fontWeight: "800",
     color: Colors.textBlack,
   },
   body: {
     color: Colors.textBlack,
   },
-};
+})
 
 // borders
 
 const Borders = {
-  borderRadius: 8,
+  borderRadius: 16,
   borderWidth: 1,
   borderColor: Colors.borderColor,
-};
+}
 
 // Icons
 
 const Icons = {
+  fontSize: FontSize.big,
   color: Colors.textWhite,
-  fontSize: FontSize.big
 }
 const IconsTab = {
   fontSize: FontSize.big,
-  color:Colors.textBlack
-
+  color: Colors.textBlack
 }
 
-
- const Container:any = {
-    flex: 1,
-    backgroundColor: Colors.background,
-  }
- const ContainerCenter:any = {
-    flex: 1,
-    backgroundColor: Colors.background,
-    alignItems: 'center',
-  }
+const Container = {
+  flex: 1,
+  backgroundColor: Colors.background,
+}
+const ContainerCenter = {
+  flex: 1,
+  backgroundColor: Colors.background,
+  alignItems: 'center',
+}
 
 // SCREENS -------------------------------------------------------------------------------------------------------------------------
 
 //  CartScreen :
 
-const CartScreenStyles = {
+const CartScreenStyles = StyleSheet.create({
   cartItem: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     height: 180,
-    padding: Margin,
+    padding: Margin.medium,
     borderBottomWidth: Borders.borderWidth,
     borderBottomColor: Colors.borderColor,
   },
-}
+})
+
+// HomeScreen : 
+
+const HomeStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.background,
+  },
+  cartIcon: {
+    position: 'absolute',
+    bottom: Margin.medium,
+    right: Margin.medium,
+    backgroundColor: Colors.secondary,
+    padding: Margin.medium,
+    borderRadius: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  cartItemCount: {
+    color: Colors.background,
+    marginLeft: Margin.medium,
+  },
+  modalContainer: {
+    backgroundColor: Colors.background,
+    padding: Margin.medium,
+    borderRadius: Borders.borderRadius,
+  },
+  modalTitle: {
+
+    marginBottom: Margin.medium,
+  },
+});
 
 // COMPONENTS -------------------------------------------------------------------------------------------------------------------------
 
 // ProductCard
 
-const ProductCardStyles = ({
+const ProductCardStyles = StyleSheet.create({
   card: {
     alignItems: 'center',
     borderWidth: 1,
@@ -131,39 +170,49 @@ const ProductCardStyles = ({
 
 // Header :
 
-const HeaderStyles:any = {
-  justifyContent: 'space-around',
-  flexDirection: 'row',
-  backgroundColor: Colors.primary,
-  padding: 15,
-  alignItems: 'center',
-}
+const HeaderStyles = StyleSheet.create({
+  Header: {
+    backgroundColor: Colors.primary,
+    padding: 15,
+  },
+  searchContainer: {
+    borderColor: Colors.textWhite,
+    borderWidth: 1,
+    borderRadius: Borders.borderRadius,
+    flexDirection: 'row',
+  },
+  searchInput: {
+    borderRadius: Borders.borderRadius,
+    height: 40,
+    paddingRight:40,
+    paddingLeft:10,
+    backgroundColor: Colors.textWhite,
+  },
+})
 
-const AlignCenter:any = {
-  alignItems: 'center',
-  justifyContent: 'Center',
-}
+
 
 // Button
 
-const ButtonStyles:any = {
+const ButtonStyles = StyleSheet.create({
   buttonContainer: {
     padding: 10,
     borderRadius: Borders.borderRadius,
     alignItems: 'center',
     borderColor: Borders.borderColor,
     backgroundColor: Colors.primary,
-    width:'100%',
+    width: '100%',
   },
+
   buttonText: {
     color: Colors.textWhite,
     fontSize: FontSize.medium,
   },
-}
+})
 
 // Modal
 
-const ModalStyles:any = {
+const ModalStyles = StyleSheet.create({
   modalContainer: {
     alignItems: 'center',
     backgroundColor: Colors.background,
@@ -172,10 +221,10 @@ const ModalStyles:any = {
   },
   modalTitle: {
     fontSize: FontSize.smal,
-    fontWeight: Fonts.title.fontWeight,
+    fontWeight: Fonts.titleWhite.fontWeight,
     marginBottom: Margin.big,
   },
-}
+})
 
 export {
   Colors,
@@ -183,5 +232,7 @@ export {
   ProductCardStyles,
   Margin, Fonts, Icons,
   HeaderStyles, AlignCenter,
-  ButtonStyles, ModalStyles, Spaces, Container, IconsTab, ContainerCenter
+  ButtonStyles, ModalStyles, Spaces,
+  Container, IconsTab, ContainerCenter,
+  CartScreenStyles, HomeStyles
 }

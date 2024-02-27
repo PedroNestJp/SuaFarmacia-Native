@@ -1,18 +1,21 @@
 // components/Button.js
 import React from 'react';
-import { Text, Pressable } from 'react-native';
+import { Text, TouchableOpacityProps, TouchableOpacity } from 'react-native';
 import { ButtonStyles } from '../Styles/styles';
 
-const Button = ({ color, title, onPress, disabled }: {
-  title: any;
-  onPress: any;
-  color: any;
-  disabled: any;
-}) => (
-  <Pressable style={[ButtonStyles.buttonContainer]} onPress={onPress} disabled={disabled}>
-    <Text style={ButtonStyles.buttonText}>{title}</Text>
-  </Pressable>
-);
+type ButtonProps = TouchableOpacityProps & {
+  title: string;
+}
+
+export function Button({ title, ...rest }: ButtonProps) {
+  return (
+    <TouchableOpacity style={[ButtonStyles.buttonContainer]} {...rest}>
+      <Text style={ButtonStyles.buttonText}>{title}</Text>
+    </TouchableOpacity>
+  )
+
+}
+
 
 export default Button;
 

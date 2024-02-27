@@ -2,15 +2,23 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import { useCart } from '../context/CartContext';
 import Button from '../components/Button';
+import { PRODUCT } from '../../utils/data/products';
+import { Redirect, useNavigation } from 'expo-router';
 
-export const ProductDetailsScreen = ({ route, navigation } : {route:any, navigation:any}) => {
-  const { product } = route.params;
+export const ProductDetailsScreen = () => {
   const { cartItems, addToCart, incrementQuantity } = useCart();
+  const navigation = useNavigation()
 
-  const isProductInCart = cartItems.some((item:any) => item.id === product.id);
+  const product = PRODUCT.find((product) => product.id)
+
+  if (!product) {
+    return <Redirect href={'/'} />
+  }
+
+  const isProductInCart = cartItems.some((item) => item.id === product.id);
 
   const handleAddToCart = () => {
-    const existingItem = cartItems.find((cartItem:any) => cartItem.id === product.id);
+    const existingItem = cartItems.find((cartItem) => cartItem.id === product.id);
 
     if (existingItem) {
       incrementQuantity(existingItem);
@@ -22,7 +30,6 @@ export const ProductDetailsScreen = ({ route, navigation } : {route:any, navigat
 
   const comprarAgora = () => {
     console.log(`Produto ${product.name} comprado agora`);
-    navigation.navigate('CartScreen', { cartItems });
   };
 
   return (
@@ -38,17 +45,17 @@ export const ProductDetailsScreen = ({ route, navigation } : {route:any, navigat
           <Button
             title={isProductInCart ? 'Produto no Carrinho' : 'Adicionar ao Carrinho'}
             onPress={handleAddToCart}
-            color={isProductInCart ? '#ccc' : '#007bff'}
+            style={{ backgroundColor: isProductInCart ? '#ccc' : '#007bff' }}
             disabled={isProductInCart}
           />
           <Button
             title="Comprar Agora"
             onPress={comprarAgora}
-            color="#4caf50"
-            disabled={''}
+            style={{ backgroundColor: "#4caf50" }}
+            disabled
           />
         </View>
-        <Button disabled={''} title="Voltar" onPress={() => navigation.goBack()} color="#555" />
+        <Button disabled title="Voltar" onPress={() => navigation.goBack()} style={{ backgroundColor: "#555" }} />
       </View>
     </View>
   );

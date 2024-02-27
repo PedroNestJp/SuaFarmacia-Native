@@ -1,81 +1,50 @@
-// src/components/ProductCard.js
-
 import React from 'react';
 import { Text, StyleSheet, Pressable, Image } from 'react-native';
-// import { Fonts, ProductCardStyles } from '../Styles/styles';
+import { Borders, Fonts } from '../Styles/styles';
 import Button from './Button';
+import { PRODUCT, ProductProps } from '../../utils/data/products';
+import { Redirect, useLocalSearchParams } from 'expo-router';
 
-interface ProductCardProps {
-  product: {
-    id: string;
-    name: string;
-    price: string;
-    image: string;
-    quantity: number;
-    shortDescription: string;
-    longDescription: string;
-  };
-  onAddToCartPress: () => void;
+type ProductCardProps = ProductProps & {
   onPress: () => void;
-}
-
-const ProductCard: React.FC<ProductCardProps> = ({ product, onPress, onAddToCartPress }) => {
-  return (
-    <Pressable style={ProductCardStyles.card} onPress={onPress}>
-      <Image source={require('../../assets/generic-photo.png')} style={styles.image} />
-      <Text style={Fonts.title}>{product.name}</Text>
-      <Text>{product.shortDescription}</Text>
-      <Text>{product.price}</Text>
-      <Button
-        color={''}
-        disabled={''}
-        title="Comprar"
-        onPress={onAddToCartPress}
-      />
-    </Pressable>
-  );
+  onAddToCartPress: () => void;
+  productProp: () => void;
 };
 
+export default function ProductCard({onPress,onAddToCartPress}: ProductCardProps) {
+
+  // Use map to create an array of all products
+  const allProducts = PRODUCT.map((product) => (
+    <Pressable key={product.id} style={styles.card} onPress={onPress} >
+      <Image source={require('../../assets/generic-photo.png')} style={styles.image} />
+      <Text style={Fonts.titleBlack}>{product.name}</Text>
+      <Text style={Fonts.subTitle}>{product.price}</Text>
+      <Text>{product.shortDescription}</Text>
+      <Button title="Comprar" onPress={onAddToCartPress} />
+    </Pressable>
+  ));
+
+  if (!allProducts.length) {
+    return <Redirect href={'/'} />;
+  }
+
+  return allProducts;
+}
+
 const styles = StyleSheet.create({
-  image: {
-    width: '100%',
-    height: 100,
-    borderRadius: 8,
-    marginBottom: 8,
-    resizeMode: 'center',
-  },
-  addToCartButton: {
-    backgroundColor: '#3498db',
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 8,
-  },
-  addToCartButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-});
-
-const Fonts = StyleSheet.create({
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    // Outras propriedades de estilo...
-  },
-  // Outros estilos...
-});
-
-const ProductCardStyles = StyleSheet.create({
   card: {
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: Borders.borderColor,
     borderRadius: 8,
-    margin: 8,
-    padding: 8,
-    width: 200,
+    padding: 16,
+    margin: 16,
   },
-  // Outros estilos...
+  image: {
+    width: '100%',
+    height: 220,
+    borderRadius: 8,
+    marginBottom: 8,
+    resizeMode: 'stretch',
+  },
 });
-
-export default ProductCard;
