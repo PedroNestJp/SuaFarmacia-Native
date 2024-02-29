@@ -38,7 +38,7 @@ const Header = ({ title }: HeaderProps) => {
       quantity={0}
       shortDescription={''}
       longDescription={''}
-      key={product}
+      key={product.id}
     />
   );
 

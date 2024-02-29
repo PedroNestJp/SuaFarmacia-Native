@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, FlatList, Text, Pressable } from 'react-native';
 import { Fonts, Margin, Colors, Borders, HomeStyles } from '../Styles/styles';
 import Header from '../components/Header';
@@ -8,7 +8,7 @@ import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import { useCart } from '../context/CartContext';
 import { Link, useLocalSearchParams, useRouter } from 'expo-router';
-import { PRODUCT } from '../../utils/data/products';
+import { PRODUCT, ProductProps } from '../../utils/data/products';
 
 const HomeScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -46,9 +46,12 @@ const HomeScreen = () => {
     console.log('Pesquisando por:', searchText, results);
   };
 
+  //const productCardRef = useRef<renderProduct<ProductProps>>(null)
+
   const renderProduct = ({ item }) => (
     <Link href={`/ProductDetailsScreen/${item.id}`} asChild>
       <ProductCard
+      //ref={productCardRef} 
         key={item.id}
         product={item}
         onAddToCartPress={() => handleAddToCart(item.id)}

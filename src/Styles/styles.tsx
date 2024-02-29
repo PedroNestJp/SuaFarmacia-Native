@@ -196,7 +196,7 @@ const HeaderStyles = StyleSheet.create({
 
 const ButtonStyles = StyleSheet.create({
   buttonContainer: {
-    padding: 10,
+    padding: 8,
     borderRadius: Borders.borderRadius,
     alignItems: 'center',
     borderColor: Borders.borderColor,
